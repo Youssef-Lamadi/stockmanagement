@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication form</title>
+</head>
+<body>
+<div>
+    <h3>Authentication Form</h3>
+</div>
+<div>
+    <form th:action="@{/authenticateTheUser}" method="post">
+        <div style="color: red">
+            <div th:switch="${param.error}">
+                <div th:case="'other'">Please verify your login or password</div>
+                <div th:case="'locked'">Your account is locked</div>
+                <div th:case="'expired'">Your account is expired</div>
+                <div th:case="'disabled'">Your account is disabled</div>
+                <div th:case="*"
+                     th:if="${param.error != null}">An error has occurred, please contact the administrator</div>
+            </div>
+        </div>
+
+        <div th:if="${param.logout != null}" style="color: green">
+            You are logged out of the system
+        </div>
+
+        <label>Login</label>
+        <br>
+        <input name="username" type="text" placeholder="Login"/>
+        <br>
+        <label>Password</label>
+        <br>
+        <input name="password" type="password" placeholder="Password"/>
+        <br>
+        <div>
+            <button type="submit">Log in</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
