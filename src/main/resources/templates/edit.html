@@ -18,7 +18,7 @@
         <div class="col-md-3 bg-white border-end p-3">
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link active fw-bold" href="#">Gestion des entrepôts</a></li>
+                <li class="nav-item"><a class="nav-link active fw-bold" href="#" th:href="@{/warehouse/}">Gestion des entrepôts</a></li>
                 <li class="nav-item">Mouvements de stock
                     <ul class="nav flex-column ms-3">
                         <li class="nav-item"><a class="nav-link" href="#">Réceptions</a></li>
@@ -26,7 +26,21 @@
                         <li class="nav-item"><a class="nav-link" href="#">Transferts</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">Manage Accounts
+                    <ul class="nav flex-column ms-4">
+                        <li class="nav-item"> <!--th:if="${role == 'ROLE_ADMIN'}"--><a class="nav-link" href="#" th:href="@{/admin/adminHome}">Admin Home</a></li>
+                        <li class="nav-item"><!--th:if="${role == 'ROLE_ADMIN'}"--><a class="nav-link" href="#" th:href="@{/common/managePersons}">Create persons</a></li>
+                        <li class="nav-item" ><!--th:if="${role == 'ROLE_ADMIN'}"--><a class="nav-link" href="#" th:href="@{/admin/createAccounts}">Create Accounts</a></li>
+                        <li class="nav-item"><!--th:if="${role == 'ROLE_ADMIN'}"--><a class="nav-link" href="#" th:href="@{/admin/manageAccounts}">List Accounts</a></li>
+                        <li class="nav-item" ><!--th:if="${role == 'ROLE_USER'}"--><a class="nav-link" href="#" th:href="@{/user/userHome}">User Home</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#">Inventaires</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
             </ul>
         </div>
 

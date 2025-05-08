@@ -1,7 +1,8 @@
 package com.project.stockmanagement.model.entity;
 
 import jakarta.persistence.*;
-import java.util.*;
+
+import java.util.Set;
 
 
 @Entity

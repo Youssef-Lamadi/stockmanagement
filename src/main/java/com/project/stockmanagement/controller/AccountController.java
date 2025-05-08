@@ -1,18 +1,12 @@
 package com.project.stockmanagement.controller;
 
+import com.project.stockmanagement.model.AccountModel;
 import com.project.stockmanagement.service.IPersonService;
 import com.project.stockmanagement.service.IUserService;
-import com.project.stockmanagement.model.AccountModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin") // Very important because, in ou Spring security configuration,
@@ -24,8 +18,8 @@ public class AccountController {
     @Autowired
     private IPersonService personService;
     // This method initializes the account creation form
-    @RequestMapping(value = "createAccountForm/{idPerson}", method = RequestMethod.GET)
-    public String createAccountForm(@PathVariable int idPerson, Model model) {
+    @GetMapping(value = "createAccountForm/{idPerson}")
+    public String createAccountForm(@PathVariable Long idPerson, Model model) {
         model.addAttribute("accountModel", new AccountModel(Long.valueOf(idPerson)));
         model.addAttribute("roleList", userService.getAllRoles());
         model.addAttribute("accountList", userService.getAllAccounts());
@@ -45,15 +39,14 @@ public class AccountController {
         return "admin/accountCreation";
     }
     // This method adds the person to database
-    @PostMapping("addAccount")
+    @PostMapping("/addAccount")
     public String addAccount(@ModelAttribute("accountModel") AccountModel accountModel, Model model) {
         // The account creation is implemented at service level
         // Just pass the role id and the person id to the service layer
         String password = userService.createUser(accountModel.getRoleId(), accountModel.getPersonId());
-        // The password will be displayed in the view
-        accountModel.setPassword(password);
+
         // The list of accounts is also displayed in the view
         model.addAttribute("accountList", userService.getAllAccounts());
-        return "/admin/accountList";
+        return "admin/accountCreation";
     }
 }
