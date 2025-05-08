@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ ${#httpServletRequest.contextPath} }}/resources/css/style.css">
+    <title>Admin</title>
+</head>
+<body>
+<ul>
+    <li><a href="{{ ${#httpServletRequest.contextPath} }}/admin/adminHome">Home</a></li>
+    <li><a href="{{ ${#httpServletRequest.contextPath} }}/admin/createAccounts">Create Accounts</a></li>
+    <li><a href="{{ ${#httpServletRequest.contextPath} }}/admin/manageAccounts">List Accounts</a></li>
+    <li><a href="{{ ${#httpServletRequest.contextPath} }}/common/managePersons">Manage Persons</a></li>
+    <li>
+        <form action="{{ ${#httpServletRequest.contextPath} }}/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </li>
+</ul>
+
+<div>
+    <h3>Account Creation Form</h3>
+</div>
+<div>
+    <form action="{{ ${#httpServletRequest.contextPath} }}/admin/addAccount" method="POST" th:object="${accountModel}">
+        <input type="hidden" th:field="*{personId}" />
+
+        <label for="roleId">Please select the user role</label>
+
+        <select id="roleId" name="roleId" th:field="*{roleId}">
+            <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.roleName}"></option>
+        </select>
+
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/resources/static/css/style.css}">
+</head>
+<body>
+
+<ul>
+    <li><a th:href="@{/admin/showAdminHome}">Home</a></li>
+    <li><a th:href="@{/admin/createAccounts}">Create Accounts</a></li>
+    <li><a th:href="@{/admin/manageAccounts}">List Accounts</a></li>
+    <li><a th:href="@{/common/managePersons}">Manage Persons</a></li>
+    <li>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </li>
+</ul>
+
+<div>
+    <h3>Accounts</h3>
+</div>
+
+<div>
+    <div th:if="${accountModel != null and accountModel.password != null}" style="color: green">
+        User created. The password generated is : <span th:text="${accountModel.password}"></span>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Login</th>
+            <th scope="col">Role</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${accountList}">
+            <td th:text="${a.username}"></td>
+            <td th:text="${a.role.roleName}"></td>
+            <td th:text="${a.person.lastName}"></td>
+            <td th:text="${a.person.firstName}"></td>
+            <td th:text="${a.person.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
