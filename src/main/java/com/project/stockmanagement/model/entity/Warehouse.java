@@ -23,7 +23,16 @@ public class Warehouse {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @OneToMany(mappedBy = "entree", cascade = CascadeType.ALL,targetEntity = Entree.class)
+    private Set<Entree> entrees;
 
+    public Warehouse() {}
+    public Warehouse(Long id, String name, String address, String code) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.code = code;
+    }
 
 
 

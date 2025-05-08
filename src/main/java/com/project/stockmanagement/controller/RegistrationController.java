@@ -2,7 +2,6 @@ package com.project.stockmanagement.controller;
 
 import com.project.stockmanagement.model.entity.Person;
 import com.project.stockmanagement.service.IPersonService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
